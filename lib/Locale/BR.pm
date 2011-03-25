@@ -9,7 +9,7 @@ our %EXPORT_TAGS = (
     all => [@EXPORT_OK],
 );
 
-
+=encoding utf8
 
 =head1 NAME
 
@@ -17,7 +17,7 @@ Locale::BR - Identify Brazilian states by two-letter codes and vice-versa
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 my %code_for_state  = ();
 my %state_for_code  = ();
@@ -78,7 +78,7 @@ Returns an alphabetically ordered list of all Brazilian state names.
 =cut
 
 sub all_state_names {
-    return values %code_for_state;
+    return sort values %state_for_code;
 }
 
 =head2 all_state_codes
@@ -88,7 +88,7 @@ Returns an alphabetically ordered list of all Brazilian state codes.
 =cut
 
 sub all_state_codes {
-    return keys %code_for_state;
+    return sort keys %state_for_code;
 }
 
 =head1 SEE ALSO
@@ -165,7 +165,9 @@ See http://dev.perl.org/licenses/ for more information.
         $state_for_code{$code} = $state;
         
         $code_for_state{uc $state}     = $code;
-        $code_for_state{uc $state_alt} = $code;
+        if ($state_alt) {
+            $code_for_state{uc $state_alt} = $code;
+        }
     }
     close DATA;
 }

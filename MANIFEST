@@ -9,3 +9,4 @@ t/01-code.t
 t/02-name.t
 Makefile.PL
 META.yml
+META.json
